@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'send_message' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    Success
+</form>
