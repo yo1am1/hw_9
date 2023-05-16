@@ -4,17 +4,14 @@ from twilio.rest import Client
 
 from celery import shared_task
 
-TWILIO_ACCOUNT_SID = ""
-TWILIO_TOKEN = ""
-TWILIO_NUMBER = ""
-try:
-    client = Client(TWILIO_ACCOUNT_SID, TWILIO_TOKEN)
-except Exception as e:
-    print(f"An error occurred: {str(e)}")
-
 
 @shared_task
-def sending():
-    number = Number.objects.last("number")
-    message = client.messages.create(from_=TWILIO_NUMBER, to=number)
-    return
+def sending(number):
+    account_sid = "ACec2a35c8a53e4f514808e3bfb75bb0b7"
+    auth_token = os.getenv("TWILIO_TOKEN")
+
+    client = Client(account_sid, auth_token)
+
+    message = client.messages.create(
+        body="Hello from Twilio", from_="+12707166231", to=number
+    )
