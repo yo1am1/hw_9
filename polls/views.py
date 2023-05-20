@@ -3,7 +3,6 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .forms import PhoneForm
-from .models import Number
 from .tasks import sending
 
 
